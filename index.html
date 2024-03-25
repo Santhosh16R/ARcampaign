@@ -19,7 +19,6 @@
 
     const mindarThree = new MindARThree({
       container: document.querySelector("#container"),
-    //   imageTargetSrc: "https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/card.mind"
       imageTargetSrc: "./Image/Knowyourleader.mind"
     });
 
@@ -39,6 +38,11 @@
     video.setAttribute('playsinline', 'playsinline');
     video.setAttribute('crossorigin', 'anonymous');
 
+    const audio = document.createElement('audio'); // Create audio element
+    audio.src = './Videos/Video1.mp4'; // Same source as video
+    audio.loop = true;
+    audio.muted = false;
+
     const videoTexture = new THREE.VideoTexture(video);
     const videoMaterial = new THREE.MeshBasicMaterial({ map: videoTexture });
     const videoPlane = new THREE.Mesh(geometry, videoMaterial);
@@ -50,6 +54,7 @@
         renderer.render(scene, camera);
       });
       video.play(); // Start playing the video
+      audio.play(); // Start playing the audio
     }
 
     const startButton = document.querySelector("#startButton");
@@ -63,6 +68,7 @@
       mindarThree.stop();
       mindarThree.renderer.setAnimationLoop(null);
       video.pause(); // Stop the video
+      audio.pause(); // Stop the audio
     });
   </script>
   <style>
