@@ -41,7 +41,7 @@
     const audio = document.createElement('audio'); // Create audio element
     audio.src = './Videos/Video1.mp4'; // Same source as video
     audio.loop = true;
-    audio.muted = false;
+    audio.muted = true;
 
     const videoTexture = new THREE.VideoTexture(video);
     const videoMaterial = new THREE.MeshBasicMaterial({ map: videoTexture });
