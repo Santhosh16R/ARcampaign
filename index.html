@@ -38,23 +38,19 @@
     video.setAttribute('playsinline', 'playsinline');
     video.setAttribute('crossorigin', 'anonymous');
 
-    const audio = document.createElement('audio'); // Create audio element
-    audio.src = './Videos/Video1.mp4'; // Same source as video
-    audio.loop = true;
-    audio.muted = true;
-
-    const videoTexture = new THREE.VideoTexture(video);
-    const videoMaterial = new THREE.MeshBasicMaterial({ map: videoTexture });
-    const videoPlane = new THREE.Mesh(geometry, videoMaterial);
-    anchor.group.add(videoPlane);
-
     const start = async () => {
       await mindarThree.start();
       renderer.setAnimationLoop(() => {
         renderer.render(scene, camera);
       });
       video.play(); // Start playing the video
-    //  audio.play(); // Start playing the audio
+      
+      // Audio initialization moved inside start() function
+      const audio = document.createElement('audio');
+      audio.src = './Videos/Video1.mp4'; // Same source as video
+      audio.loop = true;
+      audio.muted = true;
+      audio.play(); // Start playing the audio
     }
 
     const startButton = document.querySelector("#startButton");
