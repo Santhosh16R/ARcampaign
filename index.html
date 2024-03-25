@@ -19,7 +19,6 @@
 
     const mindarThree = new MindARThree({
       container: document.querySelector("#container"),
-    //   imageTargetSrc: "https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/card.mind"
       imageTargetSrc: "./Image/Knowyourleader.mind"
     });
 
@@ -38,6 +37,8 @@
     video.setAttribute('webkit-playsinline', 'webkit-playsinline');
     video.setAttribute('playsinline', 'playsinline');
     video.setAttribute('crossorigin', 'anonymous');
+    // Append video element to the body
+    document.body.appendChild(video);
 
     const videoTexture = new THREE.VideoTexture(video);
     const videoMaterial = new THREE.MeshBasicMaterial({ map: videoTexture });
@@ -49,21 +50,34 @@
       renderer.setAnimationLoop(() => {
         renderer.render(scene, camera);
       });
-      video.play(); // Start playing the video
+      //video.play();
+      
     }
 
     const startButton = document.querySelector("#startButton");
     const stopButton = document.querySelector("#stopButton");
+    const playButton = document.querySelector("#playButton");
 
     startButton.addEventListener("click", () => {
       start();
+    });
+    playButton.addEventListener("click", () => {
+      video.play();
     });
 
     stopButton.addEventListener("click", () => {
       mindarThree.stop();
       mindarThree.renderer.setAnimationLoop(null);
-      video.pause(); // Stop the video
+     // video.pause(); // Stop the video
     });
+
+    // Event listener for tracking
+    mindarThree.addEventListener('tracking', () => {
+      // Start playing the video when tracking is detected
+      video.play();
+     // start();
+    });
+
   </script>
   <style>
     body {
@@ -87,6 +101,7 @@
   <div id="control">
     <button id="startButton">Start</button>
     <button id="stopButton">Stop</button>
+    <button id="playButton">play</button>
   </div>
   <div id="container"></div>
 </body>
