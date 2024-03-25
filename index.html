@@ -19,6 +19,7 @@
 
     const mindarThree = new MindARThree({
       container: document.querySelector("#container"),
+    //   imageTargetSrc: "https://cdn.jsdelivr.net/gh/hiukim/mind-ar-js@1.2.5/examples/image-tracking/assets/card-example/card.mind"
       imageTargetSrc: "./Image/Knowyourleader.mind"
     });
 
@@ -38,19 +39,17 @@
     video.setAttribute('playsinline', 'playsinline');
     video.setAttribute('crossorigin', 'anonymous');
 
+    const videoTexture = new THREE.VideoTexture(video);
+    const videoMaterial = new THREE.MeshBasicMaterial({ map: videoTexture });
+    const videoPlane = new THREE.Mesh(geometry, videoMaterial);
+    anchor.group.add(videoPlane);
+
     const start = async () => {
       await mindarThree.start();
       renderer.setAnimationLoop(() => {
         renderer.render(scene, camera);
       });
       video.play(); // Start playing the video
-      
-      // Audio initialization moved inside start() function
-      const audio = document.createElement('audio');
-      audio.src = './Videos/Video1.mp4'; // Same source as video
-      audio.loop = true;
-      audio.muted = true;
-      audio.play(); // Start playing the audio
     }
 
     const startButton = document.querySelector("#startButton");
@@ -64,7 +63,6 @@
       mindarThree.stop();
       mindarThree.renderer.setAnimationLoop(null);
       video.pause(); // Stop the video
-      audio.pause(); // Stop the audio
     });
   </script>
   <style>
@@ -92,4 +90,4 @@
   </div>
   <div id="container"></div>
 </body>
-</html>
+</html> 
