@@ -82,6 +82,7 @@ body{
     video.setAttribute('webkit-playsinline', 'webkit-playsinline');
     video.setAttribute('playsinline', 'playsinline');
     video.setAttribute('crossorigin', 'anonymous');
+    video.setAttribute('style', 'display:none');
     // Append video element to the body
     document.body.appendChild(video);
 
@@ -99,35 +100,16 @@ body{
       
     }
 
-    // const startButton = document.querySelector("#startButton");
-    // const stopButton = document.querySelector("#stopButton");
+  
     const playButton = document.querySelector("#playButton");
     const playButtonContainer = document.querySelector(".playcontainer");
-    // startButton.addEventListener("click", () => {
-    //   start();
-    // });
+   
     playButton.addEventListener("click", () => {
       start();
       playButtonContainer.style ="display:none";
       console.log("start");
      // video.play();
     });
-
-    // stopButton.addEventListener("click", () => {
-    //   mindarThree.stop();
-    //   mindarThree.renderer.setAnimationLoop(null);
-    //   video.pause(); // Stop the video
-    // });
-
-    
-
-    // Event listener for tracking
-    // this.addEventListener('onTargetFound', () => {
-    //   // Start playing the video when tracking is detected
-    //   video.play();
-    //   console.log("Playing");
-    //  // start();
-    // });
 
 
 
@@ -165,8 +147,7 @@ mindarThree.anchors[0].onTargetLost= function() {
 </head>
 <body>
   <div id="control">
-    <!-- <button id="startButton">Start</button>
-    <button id="stopButton">Stop</button> -->
+   
    
 
    
