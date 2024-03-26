@@ -82,7 +82,7 @@ body{
     video.setAttribute('webkit-playsinline', 'webkit-playsinline');
     video.setAttribute('playsinline', 'playsinline');
     video.setAttribute('crossorigin', 'anonymous');
-    video.setAttribute('style', 'display:none');
+    video.setAttribute('style', 'z-index:-999;position:absolute');
     // Append video element to the body
     document.body.appendChild(video);
 
@@ -126,6 +126,24 @@ mindarThree.anchors[0].onTargetLost= function() {
     video.pause();
 };
 
+
+
+//disableScroll();
+
+// Function to disable scroll
+function disableScroll() {
+  // Get the current scroll position
+  var scrollPosition = [
+    self.pageXOffset || document.documentElement.scrollLeft || document.body.scrollLeft,
+    self.pageYOffset || document.documentElement.scrollTop  || document.body.scrollTop
+  ];
+  // Store the current scroll position in the data attribute
+  document.documentElement.dataset.scrollPosition = JSON.stringify(scrollPosition);
+  // Add styles to prevent scrolling
+  document.documentElement.style.overflow = 'hidden';
+  document.body.style.position = 'fixed';
+  document.body.style.top = `-${scrollPosition[1]}px`;
+}
   </script>
   <style>
     body {
