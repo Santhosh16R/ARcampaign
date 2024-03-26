@@ -4,6 +4,51 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>AR Video Playback</title>
+ <style>
+    *{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+}
+body{
+  width:100vw;
+  height:100vh;
+  background:#efeeee;
+  display:grid;
+  place-items:center;
+}
+.playcontainer{
+  display:grid;
+  place-items:center;
+  cursor:pointer;
+  padding:4rem;
+  background:#efeeee;
+  border-radius:50%;
+  transition:all 0.3s ease-in;
+  box-shadow: 10px 10px 10px rgba(0,0,0,0.1),
+    -10px -10px 10px rgba(255,255,255,0.6);
+}
+.playcontainer .fas{
+  display:grid;
+  place-items:center;
+  font-size:4rem;
+  color:gray;
+}
+.playcontainer:active{
+  box-shadow: inset 10px 10px 10px rgba(0,0,0,0.1),
+    inset -10px -10px 10px rgba(255,255,255,0.6);
+}
+.playcontainer:active .fas{
+  color:#721efa;
+}
+
+ </style>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css" 
+  integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w==" 
+  crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
   <script type="importmap">
     {
       "imports": {
@@ -54,27 +99,33 @@
       
     }
 
-    const startButton = document.querySelector("#startButton");
-    const stopButton = document.querySelector("#stopButton");
+    // const startButton = document.querySelector("#startButton");
+    // const stopButton = document.querySelector("#stopButton");
     const playButton = document.querySelector("#playButton");
-
-    startButton.addEventListener("click", () => {
-      start();
-    });
+    const playButtonContainer = document.querySelector(".playcontainer");
+    // startButton.addEventListener("click", () => {
+    //   start();
+    // });
     playButton.addEventListener("click", () => {
-      video.play();
+      start();
+      playButtonContainer.style ="display:none";
+      console.log("start");
+     // video.play();
     });
 
-    stopButton.addEventListener("click", () => {
-      mindarThree.stop();
-      mindarThree.renderer.setAnimationLoop(null);
-      video.pause(); // Stop the video
-    });
+    // stopButton.addEventListener("click", () => {
+    //   mindarThree.stop();
+    //   mindarThree.renderer.setAnimationLoop(null);
+    //   video.pause(); // Stop the video
+    // });
+
+    
 
     // Event listener for tracking
     mindarThree.addEventListener('tracking', () => {
       // Start playing the video when tracking is detected
       video.play();
+      console.log("Playing");
      // start();
     });
 
@@ -99,10 +150,15 @@
 </head>
 <body>
   <div id="control">
-    <button id="startButton">Start</button>
-    <button id="stopButton">Stop</button>
-    <button id="playButton">play</button>
+    <!-- <button id="startButton">Start</button>
+    <button id="stopButton">Stop</button> -->
+   
+
+   
   </div>
+  <div class="playcontainer" style="position: absolute;  z-index: 9999999;">
+    <i id="playButton" class="fas fa-play"></i>
+  </div>  
   <div id="container"></div>
 </body>
 </html>
