@@ -122,12 +122,28 @@ body{
     
 
     // Event listener for tracking
-    mindarThree.addEventListener('tracking', () => {
-      // Start playing the video when tracking is detected
-      video.play();
-      console.log("Playing");
-     // start();
-    });
+    // this.addEventListener('onTargetFound', () => {
+    //   // Start playing the video when tracking is detected
+    //   video.play();
+    //   console.log("Playing");
+    //  // start();
+    // });
+
+
+
+// Update the onTargetLost function for anchors[0]
+mindarThree.anchors[0].onTargetFound = function() {
+    // Get the target lost feedback element
+   video.play();
+        // Or you can set innerHTML to update the content
+        // feedbackElement.innerHTML = "Target Lost";
+    };
+
+
+// You might want to reset the feedback when the target is found again
+mindarThree.anchors[0].onTargetLost= function() {
+    video.pause();
+};
 
   </script>
   <style>
