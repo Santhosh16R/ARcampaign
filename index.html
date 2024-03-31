@@ -1,0 +1,212 @@
+<html>
+
+<head>
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <script src="https://aframe.io/releases/1.5.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/mind-ar@1.2.5/dist/mindar-image-aframe.prod.js"></script>
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const sceneEl = document.querySelector('a-scene');
+      let arSystem;
+      sceneEl.addEventListener('loaded', function () {
+        arSystem = sceneEl.systems["mindar-image-system"];
+      });
+      const v1target = document.querySelector('#v1-target');
+      const examplePlane = document.querySelector('#example-plane');
+      const startButton = document.querySelector("#example-start-button");
+      const stopButton = document.querySelector("#example-stop-button");
+      const pauseButton = document.querySelector("#example-pause-button");
+      const pauseKeepVideoButton = document.querySelector("#example-pause-keep-video-button");
+      const unpauseButton = document.querySelector("#example-unpause-button");
+      // startButton.addEventListener('click', () => {
+      //   console.log("start");
+      //   arSystem.start(); // start AR 
+      // });
+      // stopButton.addEventListener('click', () => {
+      //   arSystem.stop(); // stop AR 
+      // });
+      // pauseButton.addEventListener('click', () => {
+      //   arSystem.pause(); // pause AR, pause video
+      // });
+      // pauseKeepVideoButton.addEventListener('click', () => {
+      //   arSystem.pause(true); // pause AR, keep video
+      // });
+      // unpauseButton.addEventListener('click', () => {
+      //   arSystem.unpause(); // unpause AR and video
+      // });
+      // // arReady event triggered when ready
+      // sceneEl.addEventListener("arReady", (event) => {
+      //   // console.log("MindAR is ready")
+      // });
+      // // arError event triggered when something went wrong. Mostly browser compatbility issue
+      // sceneEl.addEventListener("arError", (event) => {
+      //   // console.log("MindAR failed to start")
+      // });
+
+
+
+      const playButton = document.querySelector("#playButton");
+      const playButtonContainer = document.querySelector(".playcontainer");
+      const joinus = document.querySelector("#joinus");
+      const video1 = document.querySelector("#v1videoplayer");
+
+
+      playButton.addEventListener('click', () => {
+        console.log("start");
+        playButtonContainer.style = "display:none";
+        arSystem.start(); // start AR 
+        video1.play();
+
+        video1.pause();
+
+      });
+
+      // detect target found
+      v1target.addEventListener("targetFound", event => {
+        console.log("V1 target found");
+        video1.play();
+        joinus.style = "display:block";
+
+      });
+
+
+      window.addEventListener('click', function () {
+        console.log("Clicked window");
+        video1.play();
+      });
+
+    });  // final close
+
+
+
+  </script>
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css"
+    integrity="sha512-iBBXm8fW90+nuLcSKlbmrPcLa0OT92xO1BIsZ+ywDWZCvqsWgccV3gFoRBv0z+8dLJgyAHIhR35VZc2oM/gI1w=="
+    crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      width: 100vw;
+      height: 100vh;
+      background: #efeeee;
+      display: grid;
+      place-items: center;
+    }
+
+    .playcontainer {
+      display: grid;
+      place-items: center;
+      cursor: pointer;
+      padding: 4rem;
+      background: #efeeee;
+      border-radius: 50%;
+      transition: all 0.3s ease-in;
+      box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.1),
+        -10px -10px 10px rgba(255, 255, 255, 0.6);
+    }
+
+    .playcontainer .fas {
+      display: grid;
+      place-items: center;
+      font-size: 4rem;
+      color: gray;
+    }
+
+    .playcontainer:active {
+      box-shadow: inset 10px 10px 10px rgba(0, 0, 0, 0.1),
+        inset -10px -10px 10px rgba(255, 255, 255, 0.6);
+    }
+
+    .playcontainer:active .fas {
+      color: #721efa;
+    }
+
+
+
+    a.button7 {
+      display: inline-block;
+      padding: 0.7em 1.7em;
+      margin: 0 0.3em 0.3em 0;
+      border-radius: 0.2em;
+      box-sizing: border-box;
+      text-decoration: none;
+      font-family: 'Roboto', sans-serif;
+      font-weight: 400;
+      color: #FFFFFF;
+      background-color: #db930f;
+      box-shadow: inset 0 -0.6em 1em -0.35em rgba(0, 0, 0, 0.17), inset 0 0.6em 2em -0.3em rgba(255, 255, 255, 0.15), inset 0 0 0em 0.05em rgba(255, 255, 255, 0.12);
+      text-align: center;
+      position: absolute;
+      left: 5vw;
+      bottom: 5vh;
+    }
+
+    a.button7:active {
+      box-shadow: inset 0 0.6em 2em -0.3em rgba(0, 0, 0, 0.15), inset 0 0 0em 0.05em rgba(255, 255, 255, 0.12);
+    }
+
+    @media all and (max-width:30em) {
+      a.button7 {
+        display: block;
+        margin: 0.4em auto;
+      }
+    }
+  </style>
+
+
+
+
+
+
+</head>
+
+<body>
+  <div style="position: absolute; z-index: 1000; display: none">
+    <button id="example-start-button">Start</button>
+    <button id="example-pause-button">Pause</button>
+    <button id="example-pause-keep-video-button">Pause (keep video)</button>
+    <button id="example-unpause-button">UnPause</button>
+    <button id="example-stop-button">Stop</button>
+  </div>
+  <div class="playcontainer" style="position: absolute;  z-index: 9999999;">
+    <i id="playButton" class="fas fa-play"></i>
+  </div>
+
+
+  <a-scene mindar-image="imageTargetSrc: Image/v1.mind; autoStart: false;" color-space="sRGB"
+    renderer="colorManagement: true, physicallyCorrectLights" vr-mode-ui="enabled: false"
+    device-orientation-permission-ui="enabled: false">
+
+
+    <a-camera position="0 0 0" look-controls="enabled: false" cursor="fuse: false; rayOrigin: mouse;"
+      raycaster="near: 10; far: 10000; objects: .clickable"></a-camera>
+
+    <a-assets>
+      <video muted id="v1video" autoplay loop="true" src="Videos/v1.mp4" webkit-playsinline playsinline></video>
+    </a-assets>
+
+    <!-- Using the asset management system. -->
+    <a-entity id="v1-target" mindar-image-target="targetIndex: 0">
+      <a-video id="v1videoplayer" src="#v1video" width="1.6" height="0.9" ></a-video>
+    </a-entity>
+  </a-scene>
+
+  <a id="joinus" href="https://forms.gle/4ePMUGhz2JiEBtSL7" class="button7"
+    style="position:absolute;background-color:#d4840c; display:none; left:5vw; bottom:5vw;">
+    <span
+      style="font-size:3em; font-family:'Comic Sans MS'; border-right:1px solid rgba(255,255,255,0.5); padding-right:0.3em; margin-right:0.3em; vertical-align:middle">BJP</span>
+    Register your support here
+  </a>
+
+</body>
+
+</html>
