@@ -105,7 +105,7 @@
 
     const { renderer, scene, camera } = mindarThree;
     const anchor = mindarThree.addAnchor(0);
-    const geometry = new THREE.PlaneGeometry(1, 0.55);
+    const geometry = new THREE.PlaneGeometry(1, 1.8);
     const material = new THREE.MeshBasicMaterial({ color: 0xffffff, transparent: true, opacity: 0 });
     const plane = new THREE.Mesh(geometry, material);
     anchor.group.add(plane);
